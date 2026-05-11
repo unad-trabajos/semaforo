@@ -51,11 +51,13 @@ export function PhaseGame({ onNext }: { onNext: () => void }) {
     return (
       <div className="mx-auto flex min-h-screen max-w-3xl flex-col items-center justify-center gap-8 px-6 py-16 text-center">
         <Semaforo active="verde" size="md" />
-        <h2 className="text-4xl font-bold md:text-5xl">¡Lo lograste! 🎉</h2>
-        <p className="text-lg text-foreground/80">
-          Acertaste <strong>{score}</strong> de <strong>{deck.length}</strong> situaciones.
-          Ahora sabes reconocer cuándo algo es buen trato, cuándo encender la alerta y cuándo pedir ayuda.
-        </p>
+        <div className="rounded-3xl bg-paper/95 px-8 py-6 shadow-card-paper backdrop-blur paper-texture">
+          <h2 className="text-4xl font-bold text-foreground md:text-5xl">¡Lo lograste! 🎉</h2>
+          <p className="mt-4 text-lg text-foreground">
+            Acertaste <strong>{score}</strong> de <strong>{deck.length}</strong> situaciones.
+            Ahora sabes reconocer cuándo algo es buen trato, cuándo encender la alerta y cuándo pedir ayuda.
+          </p>
+        </div>
         <Button
           size="lg"
           className="rounded-full bg-primary px-10 py-6 text-lg font-bold shadow-paper hover:scale-105"
