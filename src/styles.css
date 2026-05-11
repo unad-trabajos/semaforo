@@ -62,9 +62,21 @@
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
+  --radius: 1.1rem;
+  --background: oklch(0.97 0.025 80);
+  --foreground: oklch(0.25 0.04 50);
+
+  /* Semáforo del Respeto — papercraft palette */
+  --paper: oklch(0.96 0.04 75);
+  --kraft: oklch(0.78 0.08 65);
+  --kraft-dark: oklch(0.55 0.09 55);
+  --traffic-green: oklch(0.72 0.18 145);
+  --traffic-yellow: oklch(0.85 0.18 90);
+  --traffic-red: oklch(0.65 0.22 28);
+  --sky-warm: oklch(0.92 0.06 65);
+  --shadow-paper: 0 12px 30px -12px oklch(0.3 0.05 50 / 0.35), 0 4px 8px -2px oklch(0.3 0.05 50 / 0.25);
+  --shadow-card: 0 18px 40px -10px oklch(0.3 0.05 50 / 0.4);
+  --gradient-sky: linear-gradient(180deg, oklch(0.94 0.06 70) 0%, oklch(0.88 0.09 50) 100%);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.129 0.042 264.695);
   --popover: oklch(1 0 0);
