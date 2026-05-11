@@ -5,11 +5,11 @@ import { sfx } from "./sounds";
 export function PhaseSeeds({ onNext }: { onNext: () => void }) {
   return (
     <div className="mx-auto flex min-h-screen max-w-5xl flex-col items-center justify-center gap-8 px-6 py-16">
-      <div className="text-center">
+      <div className="rounded-3xl bg-paper/90 px-8 py-5 text-center shadow-paper backdrop-blur paper-texture">
         <p className="mb-2 text-sm font-semibold uppercase tracking-[0.3em] text-kraft-dark">
           Fase 1 · Las semillas
         </p>
-        <h2 className="text-balance text-4xl font-bold md:text-5xl">
+        <h2 className="text-balance text-4xl font-bold text-foreground md:text-5xl">
           Dos montones, dos realidades
         </h2>
       </div>

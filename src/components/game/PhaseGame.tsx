@@ -73,14 +73,14 @@ export function PhaseGame({ onNext }: { onNext: () => void }) {
   return (
     <div className="mx-auto flex min-h-screen max-w-6xl flex-col gap-10 px-6 py-12">
       <Confetti trigger={confetti} />
-      <div className="text-center">
+      <div className="mx-auto max-w-3xl rounded-3xl bg-paper/90 px-8 py-5 text-center shadow-paper backdrop-blur paper-texture">
         <p className="mb-1 text-xs font-semibold uppercase tracking-[0.3em] text-kraft-dark">
           Fase 2 · El detector de realidades
         </p>
-        <h2 className="text-balance text-3xl font-bold md:text-4xl">
+        <h2 className="text-balance text-3xl font-bold text-foreground md:text-4xl">
           Arrastra cada situación al color del semáforo
         </h2>
-        <p className="mt-2 text-sm text-foreground/70">
+        <p className="mt-2 text-sm text-foreground/80">
           {index + 1} / {deck.length} · Aciertos: <strong>{score}</strong>
         </p>
       </div>
@@ -149,7 +149,7 @@ export function PhaseGame({ onNext }: { onNext: () => void }) {
         </div>
       </div>
 
-      <p className="text-center text-xs text-foreground/60">
+      <p className="mx-auto rounded-full bg-paper/90 px-5 py-2 text-center text-xs text-foreground shadow-paper backdrop-blur">
         Tip: en móvil puedes <strong>tocar</strong> el color en lugar de arrastrar.
       </p>
     </div>
