@@ -59,29 +59,71 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-paper: var(--paper);
+  --color-kraft: var(--kraft);
+  --color-kraft-dark: var(--kraft-dark);
+  --color-traffic-green: var(--traffic-green);
+  --color-traffic-yellow: var(--traffic-yellow);
+  --color-traffic-red: var(--traffic-red);
+  --color-sky-warm: var(--sky-warm);
+  --font-display: "Fredoka", "Comic Sans MS", system-ui, sans-serif;
+  --font-body: "Nunito", system-ui, sans-serif;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pop-in: pop-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  --animate-wiggle: wiggle 0.4s ease-in-out;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes pop-in {
+  0% { transform: scale(0.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0); }
+  25% { transform: rotate(-4deg); }
+  75% { transform: rotate(4deg); }
+}
+@keyframes confetti-fall {
+  0% { transform: translate(0, 0) rotate(0); opacity: 1; }
+  100% { transform: translate(var(--tx), 140px) rotate(var(--tr)); opacity: 0; }
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
+  --radius: 1.1rem;
+  --background: oklch(0.97 0.025 80);
+  --foreground: oklch(0.25 0.04 50);
+
+  /* Semáforo del Respeto — papercraft palette */
+  --paper: oklch(0.96 0.04 75);
+  --kraft: oklch(0.78 0.08 65);
+  --kraft-dark: oklch(0.55 0.09 55);
+  --traffic-green: oklch(0.72 0.18 145);
+  --traffic-yellow: oklch(0.85 0.18 90);
+  --traffic-red: oklch(0.65 0.22 28);
+  --sky-warm: oklch(0.92 0.06 65);
+  --shadow-paper: 0 12px 30px -12px oklch(0.3 0.05 50 / 0.35), 0 4px 8px -2px oklch(0.3 0.05 50 / 0.25);
+  --shadow-card: 0 18px 40px -10px oklch(0.3 0.05 50 / 0.4);
+  --gradient-sky: linear-gradient(180deg, oklch(0.94 0.06 70) 0%, oklch(0.88 0.09 50) 100%);
+  --card: oklch(0.97 0.04 80);
+  --card-foreground: oklch(0.25 0.04 50);
+  --popover: oklch(0.97 0.04 80);
+  --popover-foreground: oklch(0.25 0.04 50);
+  --primary: oklch(0.55 0.16 35);
+  --primary-foreground: oklch(0.98 0.02 80);
+  --secondary: oklch(0.92 0.05 70);
+  --secondary-foreground: oklch(0.3 0.05 50);
+  --muted: oklch(0.93 0.04 75);
+  --muted-foreground: oklch(0.45 0.04 55);
+  --accent: oklch(0.85 0.12 90);
+  --accent-foreground: oklch(0.3 0.05 50);
+  --destructive: oklch(0.6 0.22 28);
+  --destructive-foreground: oklch(0.98 0.02 80);
+  --border: oklch(0.82 0.05 70);
+  --input: oklch(0.85 0.04 70);
+  --ring: oklch(0.55 0.16 35);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -140,5 +182,24 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-body);
   }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+}
+
+@layer utilities {
+  .paper-texture {
+    background-image:
+      radial-gradient(oklch(0.4 0.05 50 / 0.06) 1px, transparent 1px),
+      radial-gradient(oklch(0.4 0.05 50 / 0.04) 1px, transparent 1px);
+    background-size: 14px 14px, 7px 7px;
+    background-position: 0 0, 3px 3px;
+  }
+  .shadow-paper { box-shadow: var(--shadow-paper); }
+  .shadow-card-paper { box-shadow: var(--shadow-card); }
+  .gradient-sky { background: var(--gradient-sky); }
 }
