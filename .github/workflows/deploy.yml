@@ -1,0 +1,70 @@
+name: Deploy to GitHub Pages
+
+# Despliega la app como SPA estática en GitHub Pages cada vez que se hace push a main.
+#
+# Notas importantes:
+# - Esta plantilla está pensada como SPA. Si más adelante añades server functions
+#   de TanStack Start (rutas en src/routes/api/*), GitHub Pages NO podrá ejecutarlas:
+#   tendrías que migrar a Cloudflare Pages, Vercel o Netlify.
+# - El paso "Fix paths" reescribe el index.html para que los assets carguen bajo
+#   la subruta del repositorio (https://USUARIO.github.io/REPO/).
+# - No se usan rutas anidadas, así que no hay riesgo de 404 al refrescar.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build
+        run: bun run build
+        env:
+          VITE_BASE_PATH: /${{ github.event.repository.name }}/
+
+      - name: Locate static output
+        id: out
+        run: |
+          # TanStack Start emite el cliente en dist/client; Vite puro en dist.
+          if [ -d "dist/client" ]; then echo "dir=dist/client" >> $GITHUB_OUTPUT;
+          else echo "dir=dist" >> $GITHUB_OUTPUT; fi
+
+      - name: Add SPA fallback (404 -> index.html)
+        run: cp ${{ steps.out.outputs.dir }}/index.html ${{ steps.out.outputs.dir }}/404.html
+
+      - name: Disable Jekyll
+        run: touch ${{ steps.out.outputs.dir }}/.nojekyll
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ steps.out.outputs.dir }}
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
