@@ -182,5 +182,24 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-body);
   }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+}
+
+@layer utilities {
+  .paper-texture {
+    background-image:
+      radial-gradient(oklch(0.4 0.05 50 / 0.06) 1px, transparent 1px),
+      radial-gradient(oklch(0.4 0.05 50 / 0.04) 1px, transparent 1px);
+    background-size: 14px 14px, 7px 7px;
+    background-position: 0 0, 3px 3px;
+  }
+  .shadow-paper { box-shadow: var(--shadow-paper); }
+  .shadow-card-paper { box-shadow: var(--shadow-card); }
+  .gradient-sky { background: var(--gradient-sky); }
 }
